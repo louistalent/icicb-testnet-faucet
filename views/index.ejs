@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title><%- L['app.title'] %></title>
+		<meta name="description" content="<%- L['app.title'] %>" />
+		<meta name="keywords" content="<%- L['app.keyword'] %>" class="next-head">
+		<meta name="thumbnail" content="https://<%- hostname %>/logo256.png">
+		<meta name="clientId" content="<%- clientId %>">
+		<meta name="recaptcha" content="<%- recaptcha %>">
+		
+
+		<meta property="og:locale" content="zh-cn">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="<%- L['app.title'] %>">
+		<meta property="og:url" content="https://<%- hostname %>">
+		<meta property="og:site_name" content="<%- L['app.title'] %>">
+		<meta property="og:image" content="https://<%- hostname %>/logo.png">
+		<link rel="icon" type="image/ico" href="/favicon.ico" />
+		
+		<!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+		<style>
+			* {box-sizing: border-box;}
+			html,body{height:100%;padding:0;margin:0;overflow:hidden;font-size: 16px;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;}
+			* {scrollbar-width:6px;scrollbar-color: #eee #aaa;}
+			*::-webkit-scrollbar {width: 6px;height: 6px;}
+			*::-webkit-scrollbar-track {background: #eee;}
+			*::-webkit-scrollbar-thumb {background-color: #aaa;border-radius: 1px;}
+			h1 {color:#1a2b6b;font-size:40px;}
+			header h1 {color:#375bd2;font-size:20px;display:flex;align-items:center;}
+			main {background-color: #f5f7fd;padding-top:50px;padding-bottom:50px;}
+			section {width: 100%;padding-left:10px;padding-right:10px;margin-right: auto;margin-left: auto}
+			.desc {color:#4b5363}
+			form {margin: 32px 0px;padding: 24px;border: 1px solid rgb(231, 232, 234);background-color: rgb(255, 255, 255);border-radius: 4px;box-shadow: none;}
+			form > div:not(:last-child) {margin-bottom: 30px;}
+			label {display: block;}
+			p {margin-top: 0;color:#4b5363;margin-bottom:10px;}
+			input {width:100%;padding: 10px 1em;outline:none;font-size: 16px;border:1px solid #aaa;border-radius: 4px;}
+			input:hover,input:focus {border-color: #00a5ef;}
+			input#network {padding-left: 45px;}
+			input.folddown {border-bottom-left-radius: 0;border-bottom-right-radius: 0;}
+			button {display: flex;align-items: center;background-color: #00a5ef;color: #fff;border: none;cursor: pointer;border-radius: 4px;font-weight: 600;padding: 0.8rem 2rem;font-size: 18px;}
+			button:active, button:disabled, button.disabled {background-color: #d8d8d8;}
+			button:not(:disabled):not(.disabled):not(:active):hover {background-color: #1c8dc2;}
+			.icon {position: absolute;top: 0;bottom: 0;display: flex;align-items: center;left: 1em;}
+			.network {width: 400px;}
+			.address {max-width: 600px;}
+			@media (min-width:576px) {section {max-width:540px}}
+			@media (min-width:768px) {section {max-width:720px}}
+			@media (min-width:992px) {section {max-width:960px}}
+			@media (min-width:1300px) {section {max-width:1300px}}
+			@media (max-width:768px) {
+				section {max-width:540px}
+				h1 {color:#1a2b6b;font-size:32px;}
+				.network {width: 100%;}
+				.address {width: 100%;}
+			}
+			div.dropmenu {overflow-y:auto;position: absolute;z-index: 100;left: 0;right: 0;background-color: white;max-height:400px;border: 1px solid #aaa;border-top:none;box-shadow: 0 2px 3px #eee;}
+			div.dropmenu ul {list-style: none;padding-left: 0;margin-top: 0;margin-bottom: 0;}
+			div.dropmenu li {padding: 10px 1em;cursor: pointer;display: flex;align-items: center;color: #888;}
+			div.dropmenu li img {margin-right: 10px;width: 20px;height: 20px;opacity: 0.8;}
+			div.dropmenu li:hover {background-color: #d8d8d8;color: black}
+			div.dropmenu li:hover img {opacity: 1;}
+			.lds-ring {display: inline-block;position: relative;width: 20px;height: 20px;}
+			.lds-ring div {box-sizing: border-box;display: block;position: absolute;width: 16px;height: 16px;margin: 2px;border: 2px solid #fff;border-radius: 50%;animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;border-color: #fff transparent transparent transparent;}
+			.lds-ring div:nth-child(1) {animation-delay: -0.45s;}
+			.lds-ring div:nth-child(2) {animation-delay: -0.3s;}
+			.lds-ring div:nth-child(3) {animation-delay: -0.15s;}
+			@keyframes lds-ring {
+				0% {transform: rotate(0deg);}
+				100% {transform: rotate(360deg);}
+			}
+			.alert {
+				color: #004085;
+				background-color: #cce5ff;
+				border-color: #b8daff;
+				padding: 15px;
+				border-radius: 5px;
+			}
+			.danger {
+				color: #721c24;
+				background-color: #f8d7da;
+				border-color: #f5c6cb;
+			}
+			.warning {
+				color: #856404;
+				background-color: #fff3cd;
+				border-color: #ffeeba;
+			}
+			.success {
+				color: #155724;
+				background-color: #d4edda;
+				border-color: #c3e6cb;
+			}
+
+		</style>
+	</head>
+	<body>
+		<header>
+			<section>
+				<h1>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612"  width="32" height="32">
+						<path fill="currentColor" d="M549.33 384.88C512.8 430.24 464.12 467.1 412.92 494.33C398.79 501.85 384.47 508.67 369.96 514.65C355.45 520.61 340.79 525.81 326.07 530.26C263.61 549.17 193.24 554.78 129.59 538.14C89.44 527.65 51.16 505.76 27.22 471.86C7.26 443.59 -1.7 408.17 0.26 373.62C2.4 336.09 17.11 299.45 39.11 269.16C40 267.93 40.82 266.81 41.56 265.78C42.31 264.76 42.98 263.81 43.6 263.04C46.08 259.9 47.35 258.28 47.35 258.28C48.88 256.34 51.69 256 53.64 257.53C55.14 258.71 55.67 260.67 55.13 262.4C40.17 309.99 30.05 367.73 57.63 412.86C110.56 499.43 252.11 462.2 326.22 430.7C387.62 404.61 454.22 364.82 496.76 312.59C505.28 302.13 512.98 291.01 519.52 279.47C526.02 267.93 531.36 255.95 535.02 243.91C538.72 231.88 540.91 219.84 541.13 208.03C541.88 167.69 518.34 131.55 481.42 115.55C442.9 98.85 395.84 101.88 356.04 112.2C341.07 116.05 326.46 121.28 312.37 127.51C274.14 144.4 240.57 171.33 213.62 203.52C194.52 226.32 180.66 255.61 184.27 285.13C189.32 326.44 224.58 343.81 262.39 340.86C307.8 337.09 351.64 313.89 381.92 280.14C390.52 270.56 398.33 259.61 400.8 246.97C402.22 239.68 401.65 231.65 397.41 225.56C390.9 216.22 377.51 212.85 366.75 211.85C363.69 211.58 360.62 211.48 357.57 211.55C354.52 211.62 351.5 211.87 348.54 212.22C342.62 212.95 336.97 214.21 331.74 215.81C329.11 216.59 326.61 217.5 324.21 218.45C321.8 219.38 319.54 220.41 317.37 221.47C308.13 226.12 300.45 231.04 294.12 235.17C287.83 239.33 282.95 242.68 279.64 244.92C277.98 246.04 276.71 246.88 275.87 247.45C275.01 248.01 274.58 248.3 274.58 248.3C272.5 249.66 269.71 249.09 268.35 247.01C267.34 245.49 267.39 243.57 268.31 242.12C268.31 242.12 268.59 241.68 269.14 240.82C269.7 239.96 270.53 238.68 271.63 237C273.87 233.65 277.19 228.68 281.92 222.33C284.27 219.14 287.02 215.63 290.23 211.83C291.84 209.94 293.56 207.96 295.43 205.95C296.38 204.94 297.32 203.92 298.4 202.85C299.39 201.84 300.41 200.82 301.45 199.78C306.03 195.38 311.36 191.06 317.47 187.03C323.59 183.02 330.48 179.25 338.25 176.11C342.12 174.51 346.22 173.08 350.54 171.85C354.86 170.61 359.41 169.57 364.2 168.83C400.64 163.13 439.08 178.29 455.32 212.97C467.26 238.46 464.61 269.06 453.39 294.88C440.9 323.66 418.71 349.13 394.4 368.65C351.73 402.9 294.21 425.54 238.96 419.39C198.87 414.93 159.66 393.22 139.87 358.07C124.47 330.72 121.81 297.14 129.77 266.78C150.14 189.11 233.67 126.39 301.46 95.17C366.27 65.33 448.87 51.48 518.23 78.36C580.58 102.53 607.61 150.15 611.5 203.37C616.06 265.78 588.79 335.88 549.33 384.88Z" />
+					</svg>
+					<span style="padding-left: 10px;">
+						<%- L['app.title'] %>
+					</span>
+				</h1>
+			</section>
+		</header>
+		<main>
+			<section>
+				<h1><%- L['title'] %></h1>
+				<p class="desc"><%- L['app.desc'] %></p>
+				<form action="/request-coin" method="post" name="faucet" onsubmit="return onSubmit(event)">
+				
+					<div class="network">
+						<label><p>Network</p>
+							<div style='position:relative'>
+								<input type="text" id="network" readonly />
+								
+								<div class="dropmenu" style="display: none;">
+									<ul></ul>
+								</div>
+								<div class="icon"><img src="" width="20" height="20"></div>
+							</div>
+						</label>
+					</div>
+					<div class="address">
+						<label><p>Testnet account address</p>
+							<input id="address" name="address" maxlength="42" minlength="42" placeholder="Please input your address" pattern="^0x[a-fA-F0-9]{40}$">
+						</label>
+					</div>
+					<div>
+						<button>
+							<div class="lds-ring" style='display: none;'><div></div><div></div><div></div><div></div></div>
+							Submit
+						</button>
+					</div>
+					<div> 
+						</div></div>
+						<% if (locals.token === 'error') { %>
+							<div class="alert danger">
+								Error occupied
+							</div>
+						<% } else if (locals.token === 'limited') { %>
+							<div class="alert warning">
+								Faucet is rate-limited based on e-mail, IP, and wallet addresses. ETH is not sent to addresses with large balances.
+							</div>
+						<% } else if (locals.token === 'error') { %>
+							<div class="alert danger">
+								Error occupied
+							</div>
+						<% } else if (locals.token === 'success') { %>
+							<div class="alert success">
+								success
+							</div>
+						<% } else if (locals.token === 'captcha-invalid') { %>
+							<div class="alert danger">
+								captcha-invalid
+							</div>
+						<% } else if (locals.token === 'captcha-failed') { %>
+							<div class="alert danger">
+								captcha-failed
+							</div>
+						<% } else if (locals.token === 'git-failed') { %>
+							<div class="alert danger">
+								git-failed
+							</div>
+						<% } else if (locals.token === 'git-invalid') { %>
+							<div class="alert danger">
+								git-invalid
+							</div>
+						<% } else if (locals.token === 'git-blank') { %>
+							<div class="alert danger">
+								git-blank
+							</div>
+						<% } else if (locals.token === 'git-new') { %>
+							<div class="alert danger">
+								git-new
+							</div>
+						<% } else { %>
+							<% if (locals.token!==undefined) { %>
+								<input type="hidden" name="network">
+								<input type="hidden" name="token">
+								<input type="hidden" name="access_token" value="<%- locals.token %>"> 
+							<% } %>
+						<% } %>
+					</div>
+				</form>
+			</section>
+		</main>
+		<footer>
+
+		</footer>
+		<script>
+			const networks = {
+				ropsten:{icon:'eth', label: 'Ethereum Ropsten'},
+				rinkeby:{icon:'eth', label: 'Ethereum Rinkeby'},
+				kovan: 	{icon:'eth', label: 'Ethereum Kovan'},
+				bsc: 	{icon:'bnb', label: 'Binance SmartChain'},
+				heco: 	{icon:'ht',  label: 'Heco testnet'},
+				fantom: {icon:'ftm', label: 'Fantom testnet'},
+				mumbai: {icon:'matic',label:'Polygon mumbai'},
+				sokol:  {icon:'poa', label: 'POA network Sokol'},
+				solana: {icon:'sol', label: 'Solana testnet'},
+			}
+			
+			const $ = (selector)=>{
+				const elems = document.querySelectorAll(selector);
+				if (elems && elems.length===1) return elems[0];
+				return elems.length===0 ? null : elems;
+			}
+			const getStorage = (key) => window.sessionStorage.getItem(key);
+			const setStorage = (key,value) => window.sessionStorage.setItem(key,value);
+			const clientId = $('meta[name="clientId"]').getAttribute('content');
+			const recaptcha = $('meta[name="recaptcha"]').getAttribute('content');
+
+			const githubLoginUrl=`https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${['read:user', 'user:email'].join(' ')}&allow_signup=false`;
+
+			const setNetwork = (key) => {
+				setStorage('network', key);
+				$('.icon img').src = '/'+networks[key].icon+'.svg';
+				$('#network').value = networks[key].label;
+			}
+
+			const onChangeNetwork = (e)=>{
+				const target = e.target.tagName==='LI' ? e.target : e.target.parentNode;
+				const key = target.getAttribute('key');
+				setNetwork(key);
+				$('#address').focus();
+				console.log('li', key);
+			}
+
+			const getGrecaptcha = () => {
+				return new Promise(resolve=>{
+					if ('grecaptcha' in window) {
+						resolve(true);
+					}else{
+						const script = document.createElement('script');
+						script.onload = ()=>resolve(true);
+						script.src = `https://www.google.com/recaptcha/api.js?render=${recaptcha}`;
+						document.head.appendChild(script);
+					}
+				})
+			}
+
+			const executeCaptcha = () => new Promise(resolve=>grecaptcha.ready(()=>grecaptcha.execute(recaptcha, {action: 'submit'}).then(token=>resolve(token))));
+
+			const onSubmit = (e)=>{
+				e.preventDefault();
+				const address = $('#address').value.trim();
+				if (''===address) return $('#address').focus();
+				$('button').disabled=true;
+				$('.lds-ring').style.display='';
+				try {
+					setStorage('address', address);
+					getGrecaptcha().then(async (loaded)=>{
+						if (loaded) {
+							const token = await executeCaptcha();
+							window.open(githubLoginUrl, "_self");
+							setStorage('token', token);
+						} else {
+							$('button').disabled=false;
+							$('.lds-ring').style.display='none';
+						}
+					})
+				} catch (e) {
+					throw new Error(e.message);
+				}
+				return false;
+			}
+			const submit = ()=>{
+				$('button').disabled=true;
+				$('.lds-ring').style.display='';
+				$('input[name="network"]').value = getStorage('network');
+				$('input[name="token"]').value = getStorage('token');
+				$('form').submit();
+			}
+			$('#network').onfocus = () => {
+				$('.dropmenu').style.display = '';
+				$('#network').classList.add('folddown');
+			}
+			$('#network').onclick = $('#network').onfocus;
+			$('#network').onblur = () => {
+				setTimeout(()=>{
+					$('.dropmenu').style.display = 'none';
+					$('#network').classList.remove('folddown');
+				}, 200);
+			}
+			$('.dropmenu ul').innerHTML = Object.keys(networks).map(k=>`<li key="${k}"><img src="/${networks[k].icon}.svg" loading="lazy"> ${networks[k].label}</li>`).join('');
+			$('.dropmenu li').forEach(elem => elem.addEventListener('click',onChangeNetwork));
+			const network = getStorage('network') || 'mumbai';
+			const address = getStorage('address') || '';
+			setNetwork(network);
+			if (address) $('#address').value = address;
+			if ($('input[name="access_token"]')) submit();
+		</script>
+	</body>
+</html>
+

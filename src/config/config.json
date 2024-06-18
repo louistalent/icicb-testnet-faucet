@@ -1,0 +1,14 @@
+{
+    "ganache": {
+        "airdrop": "0x5ffD823d75DfFE2114704036a009B4B5f0aebC16",
+        "url": "http://192.168.115.160:7545",
+        "chainId": 1337,
+        "blockTime": 1
+    },
+    "sokol": {
+        "airdrop": "0xbAAE3C30460c20194678aae231510953Bb7cB812",
+        "url": "https://sokol.poa.network",
+        "chainId": 77,
+        "blockTime": 17
+    }
+}
